@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Home</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel='stylesheet' href="./styles/home.css">
+    </head>
+    <body>
+        <div class="navbar"> Movies App</div>
+ 
+        <template id='card-template'>
+            <link rel='stylesheet' href="./styles/movie-card.css">
+
+            <div class="card">
+                <div class="header">
+                    <img class="cover" src=''>
+                </div>
+                <div class="content">
+                    <p class="movietitle"></p>
+                    <span class="dscpt"></span>
+                </div>
+            </div>
+
+        </template>
+
+
+        <template id ='model-template'>
+
+            <link rel='stylesheet' href="./styles/movie-model.css">
+
+            <div class="wrapper">
+                <div class="overlay">
+                    <div class="modal">
+                      <div class="loader"></div>
+                        <p class="close">X</p>
+                        <div class="header">
+                            <div class="movietitle">Loading...</div>
+                            <div class="dscpt"></div>
+                        </div>
+                        <div class="body">
+                            <img class="cover" src=" " alt="No Image" />
+                            <div class="cast">Loading...</div>
+                        </div>    
+                    </div>
+                </div>
+            </div>  
+
+        </template>
+
+        <movie-model movietitle="Movie title #1" descpt = 'This is the description of the movie.'></movie-model>
+        <div id='movie-card-containter'></div>
+
+        <script src="./scripts/movie-card.js"> </script>
+        <script src="./scripts/movie-model.js"> </script>
+
+        <script>
+               const movies = [
+                    {movietitle: 'The Dark Knight', dscpt: 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham'+ 
+                    'Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.', cover:"https://www.dvdplanetstore.pk/wp-content/uploads/2015/08/the-dark-knight-2008dvdplanetstorepk.jpg",
+                    topcast: 'Chirstian Bale, Heath Ledger, Aaron Eckhart, Michael Caine, Maggie Gyllenhaal, Gary Oldman, Morgan Freeman, Cullian Murphy'},
+
+                    {movietitle: 'Die Hard', dscpt: 'A New York City police officer tries to save his estranged wife '+ 
+                    'and several others taken hostage by terrorists during a Christmas party at the Nakatomi Plaza in Los Angeles.', cover: "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/81DHOgpTT0L._AC_UF1000,1000_QL80_.jpg",
+                    topcast: 'Bruce Willis, Alan Rickman, Bonnie Bedelia, Reginald Vel Johnson, Paul Gleason, Wiliam Atherton'},
+
+                    {movietitle: 'The Return of the King', dscpt: 'Gandalf and Aragorn lead the World of Men '+ 
+                    'against Saurons army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.', cover: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1654216226i/61215384.jpg",
+                    topcast: 'Elijah Wood, Viggo Mortensen, Ian Mckellen, Orlando Bloom, Ali Astin, Sean Astin, David Aston, John Bach'},
+                ];
+
+
+                movies.forEach(movie =>{
+                    let node = document.createElement('movie-card');
+
+                    node.setAttribute('movietitle', movie.movietitle);
+                    node.setAttribute('dscpt', movie.dscpt);
+                    node.setAttribute('cover', movie.cover);
+
+                    document.getElementById('movie-card-containter').appendChild(node);
+                });
+
+                let cards = document.getElementsByTagName('movie-card');
+
+                [...cards].forEach(card =>{
+                    card.addEventListener('click', () =>{
+                        let  modal = document.querySelector('movie-model');
+                        let  currentcard = movies.filter(movie => movie.movietitle === card.getAttribute('movietitle')); 
+                        console.log(currentcard);
+                        modal.setAttribute('movietitle',card.getAttribute('movietitle'));
+                        modal.setAttribute('descpt',card.getAttribute('dscpt'));
+                        modal.setAttribute('cover',currentcard[0].cover);
+                        modal.setAttribute('cast',currentcard[0].topcast);
+                        modal.setAttribute('open',true);
+
+                       
+                    })
+                })
+
+  
+
+        </script>
+    </body>
+</html>

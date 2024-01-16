@@ -1,0 +1,24 @@
+body{
+    height: 100vh;
+    font-family: 'Roboto';
+    margin: 0px
+}
+
+.navbar{
+    width: 100%;
+    background-color: rgb(139, 65, 171);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white ;
+    font-size: 24px;
+    margin-bottom: 2%;
+}
+
+#movie-card-containter{
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    justify-content: center;
+}
+ 

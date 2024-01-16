@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Shadow DOM Example</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <div id = 'content'>
+            <!--shadow DOM statrs here-->
+            <shadow-area>
+                <style>
+                    h1{
+                        background : 'red';
+                        color: #fff;
+                    }        
+                </style>
+                <h1 id = 'header'> This will take the red backgroud styling.</h1>
+            </shadow-area>
+            <!-- Shadow DOM ends here -->
+            <h1 id="header"> This will Not take the red backgroud styling.</h1>
+        </div>
+      
+    </body>
+</html>

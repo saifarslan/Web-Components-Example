@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title> index </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+
+        <my-card></my-card>
+        <my-card></my-card>
+        <my-card></my-card>
+
+        <div id = 'content'></div>
+        <h1 id="header"> This will Not have a red backgroud.</h1>
+
+        <template id="card-template">
+           <p> <span class="title"></span> &mdash; <span class="subtitle"></span> </p>
+        </template>
+
+        <div id="card-titles"> </div>
+
+        <script src="./my-card.js"></script>
+        <script >
+
+            const shadowRoot = document.getElementById('content').attachShadow({mode:'open'})
+            shadowRoot.innerHTML = `
+                <style>     
+                    h1 {
+                        background: red;
+                        color: #fff;
+                    }
+                </style>
+                <h1 id='header'>This will have a red background.</h1>
+            `; 
+                
+            // end of Shadow DOM ///
+
+            const titles = [
+                {title: 'Winter Snow', subtitle: 'A cold deadly story of a witch' },
+                {title: 'Night of Darkness', subtitle: 'Horrors of the Night prey of humans'},
+                {title: 'Marrage of Witch', subtitle: 'Witch Marries an man'}
+            ]
+
+            const fragment = document.getElementById('card-template');
+            titles.forEach(title =>{
+                const instance = document.importNode(fragment.content, true);
+                instance.querySelector('.title').innerHTML = title.title;
+                instance.querySelector('.subtitle').innerHTML = title.subtitle;
+
+                document.getElementById('card-titles').appendChild(instance);
+            })
+
+        </script>
+
+    </body>
+</html>
+
+<!-- To Create a Shadow DOM
+    1. Attach a shadow
+    2. Give content and style to that shadow
+-->
